@@ -9,7 +9,9 @@ const app = express();
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(require('./routes/usuario'));
+
+// optimizando la declaracion de las rutas, haciendo referencia solo a una ruta "global"
+app.use(require('./routes/index'));
 
 // parse application/json
 app.use(bodyParser.json())
