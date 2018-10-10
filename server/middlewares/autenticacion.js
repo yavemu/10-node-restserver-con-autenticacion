@@ -15,7 +15,9 @@ let verificarToken = (req, res, next) => {
         if (err) {
             return res.status(401).json({
                 ok: false,
-                err
+                err: {
+                    message: "Autorizacion Denegada: Token no válido."
+                }
             });
         }
 
