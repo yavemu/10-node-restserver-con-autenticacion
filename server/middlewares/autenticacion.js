@@ -21,12 +21,30 @@ let verificarToken = (req, res, next) => {
             });
         }
 
-        res.usuario = decoded.usuario;
+        req.usuario = decoded.usuario;
         next();
 
     });
 }
 
+let verificarAdminRole = (req, res, next) => {
+
+    let usuario = req.usuario;
+
+    if (usuario.role === 'ADMIN_ROLE') {
+        next();
+    } else {
+        return res.status(401).json({
+            ok: false,
+            err: {
+                message: "Autorizacion Denegada: Role no válido."
+            }
+        });
+    }
+
+}
+
 module.exports = {
-    verificarToken
+    verificarToken,
+    verificarAdminRole
 }
